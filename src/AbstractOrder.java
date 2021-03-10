@@ -1,17 +1,14 @@
 public abstract class AbstractOrder implements Order {
-    private static int idCounter = 0;
-    private int id;
-    private int outerId;
+    private final int id;
     private short price;
     private int quantity;
     private int peak;
 
-    public AbstractOrder(int outerId, short price, int quantity, int peak) {
-        this.outerId = outerId;
+    public AbstractOrder(int id, short price, int quantity, int peak) {
+        this.id = id;
         this.price = price;
         this.quantity = quantity;
         this.peak = peak;
-        id = idCounter++;
     }
 
     @Override
@@ -20,13 +17,13 @@ public abstract class AbstractOrder implements Order {
     }
 
     @Override
-    public int getOuterId() {
-        return outerId;
+    public short getPrice() {
+        return price;
     }
 
     @Override
-    public short getPrice() {
-        return price;
+    public void updatePrice(short price) {
+        this.price = price;
     }
 
     @Override
@@ -35,8 +32,23 @@ public abstract class AbstractOrder implements Order {
     }
 
     @Override
+    public void increaseQuantity(int delta) {
+        quantity += delta;
+    }
+
+    @Override
+    public void decreaseQuantity(int delta) {
+        quantity -= delta;
+    }
+
+    @Override
     public int getPeak() {
         return peak;
+    }
+
+    @Override
+    public void updatePeak(int peak) {
+        this.peak = peak;
     }
 
 }
